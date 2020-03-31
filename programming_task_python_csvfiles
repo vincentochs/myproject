@@ -1,0 +1,53 @@
+#task 1
+
+import csv
+
+with open('planets1.csv') as csvfile:
+    a = csv.reader(csvfile, delimiter=',')
+    data_a= list(a)
+    for row in a:
+        print(row)
+
+with open('planets2.csv') as csvfile:
+    b = csv.reader(csvfile, delimiter=',')
+    data_b= list(b)
+    for row in b:
+        print(row)
+
+print(data_a)
+print(data_b)
+
+c = [data_a]
+d = [data_b]
+
+def difference (list1, list2):
+   list_dif = [i for i in list1 + list2 if i not in list1 or i not in list2]
+   return list_dif
+x= [c]
+y= [d]
+z = difference(c,d)
+print("Difference of first and second String:" + str(z))
+
+#task 2
+
+import pandas as pd
+
+df1 = pd.read_csv('planets2.csv')
+
+df1.['discovered']= df1['discovered'].astype('datetime64')
+
+
+# task 3
+
+import pandas as pd
+import numpy as np
+
+df1 = pd.read_csv('planets2.csv')
+
+
+
+df1.mask(df1<100,0)
+
+df1['color'] = np.where((df1.diameter==0),0, df1.color)
+
+df1['discovered']= np.where((df1.diameter==0),0, df1.discovered)
